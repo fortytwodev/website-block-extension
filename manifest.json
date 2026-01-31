@@ -22,10 +22,6 @@
       "128": "src/images/icon128.png"
     },
     "content_scripts": [
-      {
-        "js": ["src/scripts/content.js"],
-        "matches": ["<all_urls>"]
-      }
     ],
     "background": {
       "service_worker": "src/scripts/background.js",

@@ -54,17 +54,18 @@ async function printBlockedUrls() {
         let index = 1;
         for (const url of blockedUrls) {
             const li = document.createElement("li");
-            li.className = "list-group-item d-flex justify-content-between";
+            li.className = "blocked-item";
 
             const spanEl = document.createElement("span");
             spanEl.id = "url_" + index;
-            spanEl.innerHTML = url;
+            spanEl.textContent = url;
             li.appendChild(spanEl);
 
             const removeButton = document.createElement("button");
             removeButton.id = "removeButton_" + index;
-            removeButton.innerHTML = "Remove";
-            removeButton.className = "btn btn-sm btn-danger";
+            removeButton.innerHTML = "&#x2715;";
+            removeButton.className = "remove-btn";
+            removeButton.title = "Remove";
             removeButton.addEventListener("click", unblockWebsite);
 
             li.appendChild(removeButton);
