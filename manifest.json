@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Website blocking extension",
     "version": "1.0",
-    "description": "Block distracting websites",
+    "description": "An extension that blocks distracting websites. By adding a website to the list, you will not be able to access it.",
     "permissions": [
         "storage",
         "declarativeNetRequest",
