@@ -192,3 +192,14 @@ body {
     font-size: 2rem;
     margin-bottom: 10px;
 }
+
+.duplicate-alert-div
+{
+    display: none;
+    margin-top: 10px;
+}
+
+.duplicate-alert-msg
+{
+    color: red;
+}

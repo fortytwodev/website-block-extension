@@ -8,14 +8,20 @@ async function blockWebsite() {
     let inputEl = document.getElementById("inputUrl");
     if (!inputEl) return;
 
-    let hostname = inputEl.value || inputEl.placeholder;
+    let hostname = inputEl.value;
     hostname = getHostname(hostname);
 
     await chrome.storage.local.get(["blockedUrls"], async (result) => {
         let blockedUrls = result.blockedUrls || [];
-        if (blockedUrls.includes(hostname)) return;
-
+        let alertDiv = document.getElementsByClassName("duplicate-alert-div");
+        if (blockedUrls.includes(hostname))
+        {
+            alertDiv[0].style.display = 'inline-block';
+            return;
+        }
+        inputEl.value = '';
         blockedUrls.push(hostname);
+        alertDiv[0].style.display = 'none';
 
         await chrome.storage.local.set({blockedUrls: blockedUrls});
     });
@@ -49,7 +55,7 @@ async function printBlockedUrls() {
     blockedUrlsList.innerHTML = "";
 
     chrome.storage.local.get(["blockedUrls"], (result) => {
-        let blockedUrls = result.blockedUrls || [];
+        let blockedUrls = result.blockedUrls.reverse() || [];
 
         let index = 1;
         for (const url of blockedUrls) {
@@ -75,10 +81,6 @@ async function printBlockedUrls() {
         }
     });
 }
-
-chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
-    document.getElementById("inputUrl").placeholder = getHostname(tabs[0].url);
-})
 
 chrome.storage.onChanged.addListener(() => {
     printBlockedUrls().then();
